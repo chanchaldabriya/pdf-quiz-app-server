@@ -10,7 +10,7 @@ const { deleteFile } = require('./common');
 const upload = multer({ dest: './uploads' });
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -60,5 +60,6 @@ app.post('/parseAnswers', upload.any(), async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  // console.log(`App listening at http://localhost:${port}`);
+  console.log(`App listening at ${port}`);
 });
