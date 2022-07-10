@@ -1,0 +1,17 @@
+# node modules folder
+node_modules/
+
+# package-lock.json
+package-lock.json
+
+# all pdf files
+*.pdf
+
+# test files
+test.js
+
+# VS code files
+.vscode/
+
+# uploads folder
+uploads/
