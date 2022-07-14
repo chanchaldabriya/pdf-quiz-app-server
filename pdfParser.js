@@ -145,8 +145,8 @@ const readPdf = (filePath, handler, options = {}) => {
         maxPages = 0
     } = options;
 
-    console.log("readPdf - startPage: ", startPage);
-    console.log("readPdf - maxPages: ", maxPages);
+    console.log("startPage: ", startPage);
+    console.log("maxPages: ", maxPages);
 
     try {
         // const fileData = fs.readFileSync('./sample.pdf');
@@ -187,12 +187,8 @@ const getQuestionsFromPdf = (filePath, options) => {
         maxPages: maxPagesString = "0"
     } = options || {};
 
-    console.log("getQuestionsFromPdf - options:", JSON.stringify(options));
     const startPage = isNaN(parseInt(startPageString)) ? 0 : parseInt(startPageString);
     const maxPages = isNaN(parseInt(maxPagesString)) ? 0 : parseInt(maxPagesString);
-
-    console.log("getQuestionsFromPdf - startPage:", startPage);
-    console.log("getQuestionsFromPdf - maxPages:", maxPages);
 
     return readPdf(filePath, parseQuestions, { startPage, maxPages });
 };
