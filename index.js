@@ -36,7 +36,9 @@ app.use(cors());
 app.post('/parseQuestions', upload.any(), async (req, res) => {
   const file = req.files[0];
 
+  console.log("/parseQuestions path handling - req.url:", req.url);
   const queryObject = url.parse(req.url, true).query;
+  console.log("/parseQuestions path handling - queryObject:", JSON.stringify(queryObject));
 
   const parsedQuestions = await getQuestionsFromPdf(file.path, queryObject);
   // console.log(parsedQuestions.length);
