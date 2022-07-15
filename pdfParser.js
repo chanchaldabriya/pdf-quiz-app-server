@@ -1,5 +1,5 @@
 const fs = require('fs');
-const pdfParse = require('pdf-parse');
+const pdfParse = require("mighty-pdf-parser");
 
 const parseQuestions = (pdfText) => {
     const questions = [];  
@@ -136,7 +136,7 @@ const parseAnswers = (pdfText) => {
 //     }
 // };
 
-const readPdf = (filePath, handler, options = {}) => {
+const readPdf = async (filePath, handler, options = {}) => {
     if (!filePath)
         return;
 
@@ -153,8 +153,15 @@ const readPdf = (filePath, handler, options = {}) => {
         // './VisionIAS_TestBooklet.pdf'
         console.log(filePath);
         const fileData = fs.readFileSync(filePath);
+
+        // temporary hack to get pageCount to pass it to endPage option.
+        const { pageCount } = await pdfParse(fileData);
     
-        return pdfParse(fileData, {startPage: startPage, max: maxPages}).then(function(data) {
+        return pdfParse(fileData, {
+            pageRange: true,
+            startPage: startPage,
+            endPage: maxPages || pageCount
+        }).then(function(data) {
             // number of pages
             // console.log(data.numpages);
             // number of rendered pages
